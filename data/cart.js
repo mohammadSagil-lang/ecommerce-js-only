@@ -1,1 +1,20 @@
-export const cart=[];
+export const cart = [];
+//AddtoCart function is managing cart hence we kept it here
+export function AddToCart(button) {
+  let matchingItem;
+  cart.forEach((item, index) => {
+    if (item.id == button.dataset.productId) {
+      matchingItem = item;
+    }
+  });
+  if (matchingItem) {
+    matchingItem.quantity++;
+  } else {
+    cart.push({
+      id: button.dataset.productId,
+      quantity: 1,
+      image: button.dataset.productImage,
+      name: button.dataset.productName,
+    });
+  }
+}

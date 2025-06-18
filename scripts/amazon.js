@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, AddToCart} from '../data/cart.js';
 import {products} from '../data/products.js'
 //module only work in live server 
 //it has no naming conflicts we can do {cart as myCart}
@@ -59,30 +59,16 @@ let cartQuantity=0;
 document.querySelector(".products-grid").innerHTML=productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
   button.addEventListener('click',() =>{
-    let matchingItem; 
-    cart.forEach((item,index)=>{
-      if(item.id==button.dataset.productId)
-      {
-        matchingItem=item;
-      }
-    })
-    if(matchingItem)
-    {
-      matchingItem.quantity++;
-    }
-    else
-    {
-      cart.push({
-        id: button.dataset.productId,
-        quantity: 1,
-        image: button.dataset.productImage,
-        name: button.dataset.productName
-      })
-    } 
-    cartQuantity=0;
-    cart.forEach((item)=>{
-      cartQuantity+=item.quantity;
-    })
-    document.querySelector(".cart-quantity").innerHTML=cartQuantity;
+    AddToCart(button);
+    updateCartQuantitiy();
   })
 })
+
+function updateCartQuantitiy()//this fucntion updates the webpage hence we kept it here
+{
+  cartQuantity=0;
+  cart.forEach((item)=>{
+    cartQuantity+=item.quantity;
+  })
+  document.querySelector(".cart-quantity").innerHTML=cartQuantity;
+}

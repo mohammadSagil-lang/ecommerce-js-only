@@ -1,3 +1,8 @@
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js'
+//module only work in live server 
+//it has no naming conflicts we can do {cart as myCart}
+
 let productsHTML=``;
 products.forEach((product) =>{
     const html=`
@@ -78,8 +83,6 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
     cart.forEach((item)=>{
       cartQuantity+=item.quantity;
     })
-    console.log(cart);
-    console.log("cart quantity is : ",cartQuantity);
     document.querySelector(".cart-quantity").innerHTML=cartQuantity;
   })
 })

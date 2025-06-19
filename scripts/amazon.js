@@ -1,8 +1,11 @@
-import {cart, AddToCart} from '../data/cart.js';
-import {products} from '../data/products.js'
+import { AddToCart} from '../data/cart.js';
+import {products} from '../data/products.js';
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 //module only work in live server 
 //it has no naming conflicts we can do {cart as myCart}
-
+let cartQuantity ;//= JSON.parse(localStorage.getItem('cartQuantity')) || 0
+updateCartQuantitiy();
+document.querySelector(".cart-quantity").innerHTML = cartQuantity;
 let productsHTML=``;
 products.forEach((product) =>{
     const html=`
@@ -50,16 +53,16 @@ products.forEach((product) =>{
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product["id"]}" data-product-name="${product["name"]}" data-product-image="${product["image"]}" >Add to Cart</button>
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product["id"]}" >Add to Cart</button>
         </div>`
   productsHTML+=html;
 });
-let cartQuantity=0;
 
+//adding to cart
 document.querySelector(".products-grid").innerHTML=productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
   button.addEventListener('click',() =>{
-    AddToCart(button);
+    AddToCart(button,cart);
     updateCartQuantitiy();
   })
 })
@@ -71,4 +74,6 @@ function updateCartQuantitiy()//this fucntion updates the webpage hence we kept 
     cartQuantity+=item.quantity;
   })
   document.querySelector(".cart-quantity").innerHTML=cartQuantity;
+  localStorage.setItem('cartQuantity',JSON.stringify(cartQuantity));
+  localStorage.setItem('cart',JSON.stringify(cart));
 }

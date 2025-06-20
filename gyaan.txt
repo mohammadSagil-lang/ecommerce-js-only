@@ -1,0 +1,5 @@
+before writing some complicated code try to find external library
+we can search in chatgtp :e.g javascript date library
+we used MVC (Model View Controller) 
+explanation
+we used data folder to store our data which is our model then we generated the website(view) using the model (i.e data) then we interacted with website and changed the model this colled controlling then we regenerated the website (view) using model 

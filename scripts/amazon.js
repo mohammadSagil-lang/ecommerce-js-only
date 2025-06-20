@@ -1,6 +1,6 @@
-import { AddToCart} from '../data/cart.js';
+import {cart, AddToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
-let cart = JSON.parse(localStorage.getItem('cart')) || [];
+// let cart = JSON.parse(localStorage.getItem('cart')) || [];
 //module only work in live server 
 //it has no naming conflicts we can do {cart as myCart}
 let cartQuantity ;//= JSON.parse(localStorage.getItem('cartQuantity')) || 0
@@ -73,6 +73,7 @@ function updateCartQuantitiy()//this fucntion updates the webpage hence we kept 
   cart.forEach((item)=>{
     cartQuantity+=item.quantity;
   })
+
   document.querySelector(".cart-quantity").innerHTML=cartQuantity;
   localStorage.setItem('cartQuantity',JSON.stringify(cartQuantity));
   localStorage.setItem('cart',JSON.stringify(cart));

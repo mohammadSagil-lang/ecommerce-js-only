@@ -8,7 +8,7 @@ updateCartQuantitiy();
 document.querySelector(".cart-quantity").innerHTML = cartQuantity;
 let productsHTML=``;
 products.forEach((product) =>{
-    const html=`
+    const html = `
         <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -28,7 +28,7 @@ products.forEach((product) =>{
           </div>
 
           <div class="product-price">
-          $${product["priceCents"]/100}
+          $${product["priceCents"] / 100}
           </div>
 
           <div class="product-quantity-container">
@@ -45,16 +45,19 @@ products.forEach((product) =>{
               <option value="10">10</option>
             </select>
           </div>
-
-          <div class="product-spacer"></div>
+          ${product.extraHTML()} 
+          <!-- since product is a instance of clothing class so extraHTML() of clothing class will run  -->
+          <div class="product-spacer"></div>  
 
           <div class="added-to-cart">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product["id"]}" >Add to Cart</button>
-        </div>`
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${
+            product["id"]
+          }" >Add to Cart</button>
+        </div>`;
   productsHTML+=html;
 });
 

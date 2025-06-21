@@ -14,6 +14,19 @@ class Product{
   getStarsUrl(){
     return `images/ratings/rating-${(this.rating.stars)*10}.png`;
   }
+  extraHTML(){
+    return ``;
+  }
+}
+class Clothing extends Product {
+  sizeChartLink;
+  constructor(productDetails) {
+    super(productDetails); //means all the values of parent class are initialized using productDetails
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+  extraHTML() {
+    return `<a href="${this.sizeChartLink}" target="_blank">Size Chart</a>`;
+  }
 }
 export function getProduct(cartItem)
 {
@@ -498,5 +511,8 @@ export const products = [
     keywords: ["sweaters", "hoodies", "apparel", "mens"],
   },
 ].map((productDetails)=>{
+  if (productDetails.type === "clothing") 
+    return new Clothing(productDetails);
   return new Product(productDetails);
 });
+// console.log(product.extraHTML())//runs the function of the class which the product belong to(this is an example of polymorphism)

@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import {cart} from "../../data/cart-class.js";
 import { deliveryOptions, getOption } from "../../data/deliveryOptions.js";
 import { products, getProduct } from "../../data/products.js";
 // import { updateCartQuantitiy } from "../amazon.js";
@@ -12,14 +12,14 @@ let deliveryDate = today.add(7, "days");
 // let cart = JSON.parse(localStorage.getItem("cart")) || [];//slow as compared to import
 
 export function renderOrderSummary() {
-  if (cart.length == 0) {
+  if (cart.cartItems.length == 0) {
     document.querySelector(".js-order-summary").innerHTML = "cart is empty";
     return;
   }
   let cartHTML = ``;
-  cart.forEach((cartItem) => {
-    let matchingProduct=getProduct(cartItem);
-    let deliveryOption=getOption(cartItem);
+  cart.cartItems.forEach((cartItem) => {
+    let matchingProduct = getProduct(cartItem);
+    let deliveryOption = getOption(cartItem);
     let deliveryDate;
     if (deliveryOption) {
       let today = dayjs();
@@ -62,25 +62,26 @@ export function renderOrderSummary() {
 		`;
   });
   document.querySelector(".js-order-summary").innerHTML = cartHTML;
-  document.querySelectorAll(".js-delete").forEach((deletebutton, index) => {
-    deletebutton.addEventListener("click", () => {
-      cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCartPage();
-    });
-  });
+  cart.RemoveFromCart();
+  // document.querySelectorAll(".js-delete").forEach((deletebutton, index) => {
+  //   deletebutton.addEventListener("click", () => {
+  //     cart.splice(index, 1);
+  //     localStorage.setItem("cart", JSON.stringify(cart));
+  //     renderCartPage();
+  //   });
+  // });
   document.querySelectorAll(".js-delivery-option").forEach((element) => {
     element.addEventListener("click", () => {
-      cart.forEach((cartItem) => {
+      cart.cartItems.forEach((cartItem) => {
         if (cartItem.id === element.dataset.productId)
           cartItem.deliveryId = element.dataset.deliveryId;
       });
-      localStorage.setItem("cart", JSON.stringify(cart));
+      localStorage.setItem("cart", JSON.stringify(cart.cartItems));
       renderCartPage();
     });
   });
   let cartQuantity = 0;
-  cart.forEach((item) => {
+  cart.cartItems.forEach((item) => {
     cartQuantity += item.quantity;
   });
   document.querySelector(".js-checkout-page-cart-quantity").innerHTML =

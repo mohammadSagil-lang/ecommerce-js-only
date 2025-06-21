@@ -1,4 +1,4 @@
-import {cart} from '../../data/cart.js'
+import {cart} from '../../data/cart-class.js'
 import { getProduct } from '../../data/products.js';
 import { getOption } from '../../data/deliveryOptions.js';
 import { formatCurrency } from './utils/money.js';
@@ -15,11 +15,11 @@ export function renderPaymentSummary() {
           </div>
   `;
 
-  cart.forEach((cartItem) => {
+  cart.cartItems.forEach((cartItem) => {
     //calculating totalpriceCents(excluding tax and shipping)
     let matchingProduct = getProduct(cartItem);
     priceCents += matchingProduct.priceCents * cartItem.quantity;
-    let deliveryOption=getOption(cartItem) || {priceCents:0};
+    let deliveryOption = getOption(cartItem) || { priceCents: 0 };
     shipping += deliveryOption.priceCents * cartItem.quantity;
   });
   let totalBeforeTax = priceCents + shipping;

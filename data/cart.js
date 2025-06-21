@@ -1,23 +1,23 @@
-// import { deliveryOptions } from "./deliveryOptions";
+// // import { deliveryOptions } from "./deliveryOptions";
 
-export let cart =JSON.parse(localStorage.getItem('cart')) || [];
+// export let cart =JSON.parse(localStorage.getItem('cart')) || [];
 
-//AddtoCart function is managing cart hence we kept it here
-export function AddToCart(button,cart) {
-  let matchingItem;
+// //AddtoCart function is managing cart hence we kept it here
+// export function AddToCart(button,cart) {
+//   let matchingItem;
   
-  cart.forEach((item, index) => {
-    if (item.id === button.dataset.productId) {
-      matchingItem = item;
-    }
-  });
-  if (matchingItem) {
-    matchingItem.quantity++;
-  } else {
+//   cart.forEach((item, index) => {
+//     if (item.id === button.dataset.productId) {
+//       matchingItem = item;
+//     }
+//   });
+//   if (matchingItem) {
+//     matchingItem.quantity++;
+//   } else {
 
-    cart.push({
-      id: button.dataset.productId,
-      quantity: 1
-    });
-  }
-}
+//     cart.push({
+//       id: button.dataset.productId,
+//       quantity: 1
+//     });
+//   }
+// }

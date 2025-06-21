@@ -1,4 +1,4 @@
-import {cart, AddToCart} from '../data/cart.js';
+import {cart} from '../data/cart-class.js';
 import {products} from '../data/products.js';
 // let cart = JSON.parse(localStorage.getItem('cart')) || [];
 //module only work in live server 
@@ -21,7 +21,7 @@ products.forEach((product) =>{
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${(product["rating"].stars)*10}.png">
+              src="${product.getStarsUrl()}">
             <div class="product-rating-count link-primary">
             ${product["rating"].count}
             </div>
@@ -62,7 +62,7 @@ products.forEach((product) =>{
 document.querySelector(".products-grid").innerHTML=productsHTML;
 document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
   button.addEventListener('click',() =>{
-    AddToCart(button,cart);
+    cart.AddToCart(button);
     updateCartQuantitiy();
   })
 })
@@ -70,11 +70,10 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) =>{
 function updateCartQuantitiy()//this fucntion updates the webpage hence we kept it here
 {
   cartQuantity=0;
-  cart.forEach((item)=>{
+  cart.cartItems.forEach((item)=>{
     cartQuantity+=item.quantity;
   })
-
   document.querySelector(".cart-quantity").innerHTML=cartQuantity;
   localStorage.setItem('cartQuantity',JSON.stringify(cartQuantity));
-  localStorage.setItem('cart',JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(cart.cartItems));
 }

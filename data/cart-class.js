@@ -39,4 +39,4 @@ class Cart {
   }
 }
 export let cart=new Cart('cart');
-console.log("cart.GetItems()",cart.GetItems());
+// console.log("cart.GetItems()",cart.GetItems());

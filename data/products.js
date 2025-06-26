@@ -40,8 +40,22 @@ export function getProduct(cartItem)
   return matchingProduct;
 }
 export let products = [];
+//You can only use await inside an async function.
+//await lets us write asynchronous code like synchronous code
+//it makes the async code to wait untill this code is completed
+export async function loadProducts(){
+  const response = await fetch("https://supersimplebackend.dev/products");//async await is the best way to handle async code 
+  const data= await response.json();//we can't go to next like before parsing response
+  products = data.map((productDetails) => {
+    if (productDetails.type === "clothing") return new Clothing(productDetails);
+    return new Product(productDetails);
+  });
+}
+/*
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
+  xhr.open("GET", "https://supersimplebackend.dev/products");
+  xhr.send(); //sends a request to the server
   xhr.addEventListener("load", () => {
     products = JSON.parse(xhr.response).map((productDetails) => {
       if (productDetails.type === "clothing")
@@ -51,9 +65,8 @@ export function loadProducts(fun) {
     fun(); //without fun products would be loaded after running amazon.js
     // also it is a callback(a function to  run in the future)
   });
-  xhr.open("GET", "https://supersimplebackend.dev/products");
-  xhr.send(); //sends a request to the server
 }
+*/
 // export const products = [
 //   {
 //     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",

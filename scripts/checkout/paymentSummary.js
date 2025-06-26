@@ -6,7 +6,8 @@ export function renderPaymentSummary() {
   
   let priceCents = 0;
   let shipping=0;
-  document.querySelector(".js-payment-summary").innerHTML = `
+  if (document.querySelector(".js-payment-summary"))
+    document.querySelector(".js-payment-summary").innerHTML = `
           <div class="payment-summary-title">
             Order Summary
           </div>
@@ -69,6 +70,7 @@ export function renderPaymentSummary() {
             Place your order
           </button>
   `;
-  document.querySelector(".js-payment-summary").innerHTML=html;
+  if (document.querySelector(".js-payment-summary"))
+    document.querySelector(".js-payment-summary").innerHTML = html;
 
 }

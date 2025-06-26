@@ -2,7 +2,7 @@ import {cart} from "../../data/cart-class.js";
 import { deliveryOptions, getOption } from "../../data/deliveryOptions.js";
 import { products, getProduct } from "../../data/products.js";
 // import { updateCartQuantitiy } from "../amazon.js";
-import { renderCartPage } from "../cart/cartPage.js";
+import { renderCartPage } from "../checkout.js";
 
 
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js"; //this is a default export ,each file can have only one default export function
@@ -61,7 +61,8 @@ export function renderOrderSummary() {
 		</div>
 		`;
   });
-  document.querySelector(".js-order-summary").innerHTML = cartHTML;
+  if (document.querySelector(".js-order-summary"))
+    document.querySelector(".js-order-summary").innerHTML = cartHTML;
   cart.RemoveFromCart();
   // document.querySelectorAll(".js-delete").forEach((deletebutton, index) => {
   //   deletebutton.addEventListener("click", () => {
@@ -84,8 +85,9 @@ export function renderOrderSummary() {
   cart.cartItems.forEach((item) => {
     cartQuantity += item.quantity;
   });
-  document.querySelector(".js-checkout-page-cart-quantity").innerHTML =
-    cartQuantity + " Items";
+  if (document.querySelector(".js-checkout-page-cart-quantity"))
+    document.querySelector(".js-checkout-page-cart-quantity").innerHTML =
+      cartQuantity + " Items";
 }
 function deliveryOptionhtml(matchingProduct, cartItem) {
   let html = ``;

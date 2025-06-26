@@ -3,8 +3,9 @@ import {products ,loadProducts} from '../data/products.js';
 // let cart = JSON.parse(localStorage.getItem('cart')) || [];
 //module only work in live server 
 //it has no naming conflicts we can do {cart as myCart}
-function renderProductsGrid()
+async function renderProductsGrid()
 {
+  await loadProducts();
   let cartQuantity ;//= JSON.parse(localStorage.getItem('cartQuantity')) || 0
   updateCartQuantitiy();
   document.querySelector(".cart-quantity").innerHTML = cartQuantity;
@@ -83,4 +84,4 @@ function renderProductsGrid()
     localStorage.setItem("cart", JSON.stringify(cart.cartItems));
   }
 }
-loadProducts(renderProductsGrid);
+renderProductsGrid();

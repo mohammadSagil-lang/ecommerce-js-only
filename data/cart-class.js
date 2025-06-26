@@ -1,4 +1,4 @@
-import { renderCartPage } from "../scripts/cart/cartPage.js";
+import { renderCartPage } from "../scripts/checkout.js";
 class Cart {
   cartItems;
   localStorageKey;
@@ -39,4 +39,5 @@ class Cart {
   }
 }
 export let cart=new Cart('cart');
-// console.log("cart.GetItems()",cart.GetItems());
+
+console.log("cart.GetItems()",cart.GetItems());

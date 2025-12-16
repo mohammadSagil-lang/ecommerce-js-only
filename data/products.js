@@ -1,4 +1,8 @@
 // some places localStorageKey is not used ,simply cart is used so correct it if u want more than one cart 
+
+
+
+
 class Product{
   id;
   image;
@@ -22,7 +26,7 @@ class Product{
 class Clothing extends Product {
   sizeChartLink;
   constructor(productDetails) {
-    super(productDetails); //means all the values of parent class are initialized using productDetails
+    super(productDetails); 
     this.sizeChartLink = productDetails.sizeChartLink;
   }
   extraHTML() {
